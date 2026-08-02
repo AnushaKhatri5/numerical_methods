@@ -1,6 +1,4 @@
 """
-Question 6: Finite Differences and Newton's Interpolation
-Parts 5-7: Newton's Forward/Backward Interpolation and Error Comparison
 
 5. Using Newton's Forward Interpolation Formula, estimate the value of f(2.5).
 6. Using Newton's Backward Interpolation Formula, estimate the value of f(3.7).

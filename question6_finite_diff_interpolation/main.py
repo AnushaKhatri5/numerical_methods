@@ -9,9 +9,6 @@ This file merges:
 Running this file executes the ENTIRE Question 6 (parts 1-7) in one go,
 producing one continuous terminal output for the report.
 
-NOTE: This file must be run from INSIDE the
-'question6_finite_diff_interpolation' folder, since it imports directly
-from the two files sitting next to it.
 """
 
 import pandas as pd
