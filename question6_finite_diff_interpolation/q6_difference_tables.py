@@ -151,30 +151,3 @@ def determine_polynomial_degree(table, tol=1e-6):
                 return order
     return None
 
-# MAIN PROGRAM
-def main():
-    print("Given Data:")
-    df = pd.DataFrame({"X": X, "Y": Y})
-    print(df.to_string(index=False))
-
-    fwd_table = forward_difference_table(Y)
-    print_forward_table(X, fwd_table)
-
-    bwd_table = backward_difference_table(Y)
-    print_backward_table(X, bwd_table)
-
-    cen_table = central_difference_table(Y)
-    print_central_table(X, cen_table)
-
-    degree = determine_polynomial_degree(fwd_table)
-
-    print("\n4. POLYNOMIAL CHECK ")
-    if degree is not None:
-        print(f"The data represents a polynomial of degree {degree}.")
-    else:
-        print("The data does not represent a polynomial "
-              "(differences never become constant/zero).")
-
-
-if __name__ == "__main__":
-    main()

@@ -1,7 +1,4 @@
 """
-Question 6: Finite Differences and Newton's Interpolation
-Parts 5-7: Newton's Forward/Backward Interpolation and Error Comparison
-Assigned to: Anusha
 
 5. Using Newton's Forward Interpolation Formula, estimate the value of f(2.5).
 6. Using Newton's Backward Interpolation Formula, estimate the value of f(3.7).
@@ -11,11 +8,59 @@ Assigned to: Anusha
 Data given in the question:
 X : 0  1  2  3  4
 Y : 1  3  7  13 21
-
-NOTE: This file needs the forward_difference_table() function from
-q6_difference_tables.py (written by Ushma). Make sure both files are in
-the same folder, then import it like this:
-
-    from q6_difference_tables import forward_difference_table
 """
+
+from q6_difference_tables import forward_difference_table, backward_difference_table
+
+
+def newton_forward_interpolation(x, y, value):
+    """
+    Estimate f(value) using Newton's Forward Interpolation Formula.
+    Uses the FIRST value of each order from the forward difference table.
+    """
+    table = forward_difference_table(y)
+    h = x[1] - x[0]
+    p = (value - x[0]) / h
+
+    result = table[0][0]
+    p_term = 1
+    fact = 1
+    for i in range(1, len(table)):
+        p_term *= (p - (i - 1))
+        fact *= i
+        result += (p_term / fact) * table[i][0]
+
+    return result
+
+
+def newton_backward_interpolation(x, y, value):
+    """
+    Estimate f(value) using Newton's Backward Interpolation Formula.
+    Uses the LAST value of each order from the backward difference table.
+    """
+    table = backward_difference_table(y)
+    h = x[1] - x[0]
+    p = (value - x[-1]) / h
+
+    result = table[0][-1]
+    p_term = 1
+    fact = 1
+    for i in range(1, len(table)):
+        p_term *= (p + (i - 1))
+        fact *= i
+        result += (p_term / fact) * table[i][-1]
+
+    return result
+
+
+def compute_error(interpolated_value, exact_value):
+    """
+    Compute the interpolation error between the interpolated value
+    and the exact value (if known).
+    Returns absolute error and percentage error.
+    """
+    absolute_error = abs(exact_value - interpolated_value)
+    percentage_error = (absolute_error / abs(exact_value)) * 100 if exact_value != 0 else None
+    return absolute_error, percentage_error
+
 
